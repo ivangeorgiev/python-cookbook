@@ -189,5 +189,7 @@ Further reading
 =====================
 
 - `typo3 rest cheatsheet`_
+- Write the Docs's list of `Tools for documentation writing`_
 
 .. _typo3 rest cheatsheet: https://docs.typo3.org/m/typo3/docs-how-to-document/main/en-us/WritingReST/CheatSheet.html
+.. _Tools for documentation writing: https://www.writethedocs.org/guide/tools/
