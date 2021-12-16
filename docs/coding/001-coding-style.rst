@@ -1,9 +1,10 @@
+===============
 Coding Style
 ===============
 
 
 Pre-commit
-------------
+===============
 
 To get started with ``pre-commit``, follow these steps:
 
@@ -41,6 +42,8 @@ To get started with ``pre-commit``, follow these steps:
         rev: 4.0.1
         hooks:
             - id: flake8
+              args:
+                - --show-source  # Instruct flake8 to show sorce along with error
         - repo: https://github.com/pre-commit/mirrors-eslint
         rev: v7.32.0
         hooks:
@@ -75,7 +78,7 @@ To get started with ``pre-commit``, follow these steps:
    If you do not specify the ``--all-files`` option, ``pre-commit`` will run only against staged files.
 
 Editorconfig
--------------
+===============
 
 `EditorConfig <https://editorconfig.org/>`_ project consists of a file format for defining coding styles and a collection of text editor plugins that enable editors to read the file format and adhere to defined styles. EditorConfig files are easily readable and they work nicely with version control systems.
 
@@ -138,7 +141,19 @@ Plugins (see `EditorConfig plugins download <https://editorconfig.org/#download>
 
 
 Flake8
------------
+===============
+
+Flake8 combines pyflakes_ and pep8_ (pep8_ was renamed and is now pycodestyle_ to avoid confusion) into a single command.
+
+Add ``Flake8`` config into your ``tox.ini`` or ``setup.cfg``:
+
+.. code-block:: ini
+
+    [flake8]
+    exclude = build,.git,.tox,./tests/.env,**/migrations/*
+    ignore = W504,W601
+    max-line-length = 119
+
 
 `In-line ignoring errors <https://flake8.pycqa.org/en/latest/user/violations.html#in-line-ignoring-errors>`_:
 
@@ -155,9 +170,51 @@ Further Flake8_ reading:
 .. _Flake8: https://flake8.pycqa.org/en/latest/index.html
 .. _Flake8 documentation: Flake8_
 .. _Flake8 rules: https://www.flake8rules.com/
+.. _pep8: https://pep8.readthedocs.io/
+.. _pycodestyle: https://pycodestyle.pycqa.org/
+.. _pycodestyle source: https://github.com/PyCQA/pycodestyle
+.. _pyflakes: https://pypi.org/project/pyflakes/
+
+Document autoformat
+====================
+
+Frequently used Python document autoformatters are:
+
+- ``autopep8`` - autopep8_
+- ``black`` - black_
+- ``yapf`` - `Yet another Python formatter`_
+
+VS Code Python autoformatting
+-------------------------------
+
+Python extension for VS Code comes with autoformatting feature. You can format active document:
+
+- Keyboard shortcut :kbd:`Alt` + :kbd:`Shift` + :kbd:`F`
+- Command palette: :kbd:`Ctrl` + :kbd:`Shift` + :kbd:`P` > ``>Format document``
+
+To select or change the formatting tool used:
+
+1. Open settings using either method:
+
+   - File > Preferences > Settings
+   - Command palette :kbd:`Ctrl` + :kbd:`Shift` + :kbd:`P` > ``>Preferences: Open Settings``
+   - :kbd:`Ctrl` + :kbd:`,`
+
+2. Navigate to ``Extensions`` > ``Python``
+3. Scroll to the *Formatting:* **Provider**
+4. Select the formatter to be used, e.g. ``yapf``
+
+There are also provider-specific settings which could be used to customize the formatting behavior.
+
+.. _autopep8: https://pypi.org/project/autopep8/
+.. _black: https://black.readthedocs.io/en/stable/
+.. _Yet another Python formatter: yapf_
+.. _yapf: https://github.com/google/yapf
+
 
 Further reading
-------------------
+=================
 
 - `Django coding style <https://docs.djangoproject.com/en/dev/internals/contributing/writing-code/coding-style/>`_
 - `Executable book Coding Style <https://executablebooks.org/en/latest/contributing.html#coding-style>`_
+- `Linters and formatters <https://books.agiliq.com/projects/essential-python-tools/en/latest/linters.html>`_

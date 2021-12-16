@@ -1,8 +1,9 @@
+==========================
 Documentation with Sphinx
 ==========================
 
 Start a Sphinx project
-----------------------------------------
+=======================
 
 1. Create virtual environment
 2. Install Sphinx
@@ -10,7 +11,7 @@ Start a Sphinx project
 4. Build documentation
 
 1. Create virtual environment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------
 
 This step is optional. You can use Python installed on your system directly.
 However it is good practice to keep your project isolated from other projects.
@@ -51,7 +52,7 @@ All packages you install are installed into the virtual environment and do not
 have any impact on the global Python environment.
 
 2. Install Sphinx
-~~~~~~~~~~~~~~~~~~
+--------------------
 
 You can use ``pip`` to install ``sphinx`` package directly. I personally prefer
 to use ``requirements.txt`` file:
@@ -71,7 +72,7 @@ Than run ``pip`` to install required packages:
 
 
 3. Setup Sphinx project
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------
 
 Document sources need to be stored in a directory. Common approach is
 to use ``docs`` directory under the project root to keep the documentation sources
@@ -124,7 +125,7 @@ If you want to experiment with other themes, you can look at:
 - `<https://sphinxthemes.com/>`_
 
 4. Build documentation
-~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------
 
 To build the documentation from the ``docs`` directory you execute the ``make`` script.
 ``make`` script supports various output formats. To build documentation in HTML format:
@@ -152,10 +153,10 @@ You can build other formats, e.g.
 For more information on Sphinx build refer to the `documentation <https://www.sphinx-doc.org/en/master/man/sphinx-build.html>`_.
 
 Hosting on Read the Docs
--------------------------
+===========================
 
 Add build requirements
-~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------
 
 If you need to install additional build-time dependencies, e.g. for a custom theme, you
 can create a ``.readthedocs.yaml`` file and place it at the root of your project:
@@ -182,3 +183,11 @@ If necessary, you coul have more than one ``requirements.txt`` file and specify 
 
 For more information refer to `Configuration File V2 <https://docs.readthedocs.io/en/stable/config-file/v2.html>`_
 documentation.
+
+
+Further reading
+=====================
+
+- `typo3 rest cheatsheet`_
+
+.. _typo3 rest cheatsheet: https://docs.typo3.org/m/typo3/docs-how-to-document/main/en-us/WritingReST/CheatSheet.html
