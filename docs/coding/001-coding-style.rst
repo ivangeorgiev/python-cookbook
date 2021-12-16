@@ -135,6 +135,9 @@ Here is sample ``.editorconfig`` file, based on Django's ``.editorconfig``, to s
     [*.yml]
     indent_size = 2
 
+    [*.rst]
+    indent_size = 3
+
 
 Plugins (see `EditorConfig plugins download <https://editorconfig.org/#download>`_ for full list):
 
