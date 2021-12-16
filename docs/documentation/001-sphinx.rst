@@ -75,7 +75,7 @@ Than run ``pip`` to install required packages:
 
 Document sources need to be stored in a directory. Common approach is
 to use ``docs`` directory under the project root to keep the documentation sources
-and artifacts. To initialize the directory as Sphinx project, the 
+and artifacts. To initialize the directory as Sphinx project, the
 ``sphinx-quickstart`` is used:
 
 .. code-block:: console
@@ -140,7 +140,7 @@ To build the documentation from the ``docs`` directory you execute the ``make`` 
 
     The HTML pages are in _build\html.
 
-You can build other formats, e.g. 
+You can build other formats, e.g.
 
 - ``epub``
 - ``latex``
@@ -157,7 +157,7 @@ Hosting on Read the Docs
 Add build requirements
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-If you need to install additional build-time dependencies, e.g. for a custom theme, you 
+If you need to install additional build-time dependencies, e.g. for a custom theme, you
 can create a ``.readthedocs.yaml`` file and place it at the root of your project:
 
 .. code-block:: yaml

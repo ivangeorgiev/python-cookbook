@@ -10,6 +10,7 @@ Welcome to Python Cookbook's documentation!
    :maxdepth: 2
    :glob:
 
+   coding/*
    documentation/*
 
 .. Indices and tables
