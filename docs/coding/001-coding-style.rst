@@ -42,8 +42,9 @@ To get started with ``pre-commit``, follow these steps:
         rev: 4.0.1
         hooks:
             - id: flake8
-              args:
-                - --show-source  # Instruct flake8 to show sorce along with error
+              additional_dependencies: ['flake8-quotes', 'flake8-todos', 'flake8-docstrings']
+              # args:
+              #   - --show-source  # Instruct flake8 to show sorce along with error. Specify in setup.cfg
         - repo: https://github.com/pre-commit/mirrors-eslint
         rev: v7.32.0
         hooks:
@@ -153,7 +154,9 @@ Add ``Flake8`` config into your ``tox.ini`` or ``setup.cfg``:
     exclude = build,.git,.tox,./tests/.env,**/migrations/*
     ignore = W504,W601
     max-line-length = 119
-
+    show-source = true
+    inline-quotes = single
+    docstring-quotes = double
 
 `In-line ignoring errors <https://flake8.pycqa.org/en/latest/user/violations.html#in-line-ignoring-errors>`_:
 
