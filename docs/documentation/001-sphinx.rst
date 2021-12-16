@@ -150,3 +150,35 @@ You can build other formats, e.g.
 - ``dirhtml``
 
 For more information on Sphinx build refer to the `documentation <https://www.sphinx-doc.org/en/master/man/sphinx-build.html>`_.
+
+Hosting on Read the Docs
+-------------------------
+
+Add build requirements
+~~~~~~~~~~~~~~~~~~~~~~~
+
+If you need to install additional build-time dependencies, e.g. for a custom theme, you 
+can create a ``.readthedocs.yaml`` file and place it at the root of your project:
+
+.. code-block:: yaml
+
+    version: 2
+
+    python:
+      install:
+        - requirements: requirements.txt
+
+If necessary, you coul have more than one ``requirements.txt`` file and specify Python version to be used:
+
+.. code-block:: yaml
+
+    version: 2
+
+    python:
+      version: "3.7"
+      install:
+        - requirements: docs/requirements.txt
+        - requirements: requirements.txt
+
+For more information refer to `Configuration File V2 <https://docs.readthedocs.io/en/stable/config-file/v2.html>`_
+documentation.
