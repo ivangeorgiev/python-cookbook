@@ -190,6 +190,8 @@ Further reading
 
 - `typo3 rest cheatsheet`_
 - Write the Docs's list of `Tools for documentation writing`_
+- `Box drawing characters <https://en.wikipedia.org/wiki/Box-drawing_character>`__
+- `Unicode Character Code Charts <https://unicode.org/charts/>`__
 
 .. _typo3 rest cheatsheet: https://docs.typo3.org/m/typo3/docs-how-to-document/main/en-us/WritingReST/CheatSheet.html
 .. _Tools for documentation writing: https://www.writethedocs.org/guide/tools/

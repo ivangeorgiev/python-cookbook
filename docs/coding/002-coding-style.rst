@@ -6,6 +6,9 @@ Coding Style
 Pre-commit
 ===============
 
+Getting started
+----------------
+
 To get started with ``pre-commit``, follow these steps:
 
 1. **Install pre-commit.** To do so, follow `the pre-commit installation instructions <https://pre-commit.com/#install>`_.
@@ -77,6 +80,57 @@ To get started with ``pre-commit``, follow these steps:
        Check for added large files....................................Passed
 
    If you do not specify the ``--all-files`` option, ``pre-commit`` will run only against staged files.
+
+Tips and tricks
+----------------
+
+Execute pytest with each commit
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can use local repository to define in-place hook.
+
+.. code-block:: yaml
+
+   # FILE: .pre-commit-config.yaml
+   repos:
+      - repo: local
+        hooks:
+          - id: pytest
+            name: execute pytest
+            language: python
+            entry: pytest
+            pass_filenames: false
+            stages: [commit]
+            additional_dependencies: ['pytest']
+
+
+Validate commit message
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+To make this work, you also need to install ``pre-commit`` as ``commit-msg`` hook.
+
+.. code-block:: console
+
+   $ pre-commit install -t commit-msg
+   pre-commit installed at .git\hooks\commit-msg
+
+You can use local repository and ``pygrep`` language to validate commit message against regular expression.
+
+Following hook will fail commit if message doesn't comply to Executable Book's project `commit message rules <https://executablebooks.org/en/latest/contributing.html#commit-messages>`_. The emoji part is skipped.
+
+.. code-block:: yaml
+
+   # FILE: .pre-commit-config.yaml
+   repos:
+      - repo: local
+        hooks:
+          - id: commit-message
+            name: check for commit message
+            language: pygrep
+            entry: '\A(BREAKING|NEW|IMPROVE|FIX|DOCS|MAINTAIN|TEST|RELEASE|UPGRADE|REFACTOR|DEPRECATE|MERGE|OTHER): .{1,72}(\n|\Z)'
+            args: [--negate, --multiline]
+            stages: [commit-msg]
+
 
 Editorconfig
 ===============
