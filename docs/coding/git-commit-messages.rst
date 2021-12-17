@@ -148,6 +148,25 @@ Adds optional scope, breaking change indicator and PR (pull request) number.
       └─⫸ Commit Type: Same as Semantic Commit Message.
 
 
+Browsing History
+-----------------
+
+Git provides us the power to browse the repository commit history - so we’re able to figure out what actually happened, who contributed and so on.
+
+Let’s see how the conventions might ease up the browsing:
+
+.. code-block:: console
+
+   $ git log --oneline --grep "^feat\|^fix\|^perf"
+
+We use the commit message type to filter out and so showing only the production changes (all of the messages that start with feat, fix or perf).
+
+Another example:
+
+.. code-block:: console
+
+   $ git log --oneline --grep "^feat" | wc -l
+
 Further reading
 ----------------
 
