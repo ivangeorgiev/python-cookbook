@@ -147,13 +147,28 @@ Adds optional scope, breaking change indicator and PR (pull request) number.
       │
       └─⫸ Commit Type: Same as Semantic Commit Message.
 
+Linting Commit Messages
+-----------------------
+
+https://jorisroovers.com/gitlint/
+
+
+Generate changelog
+-------------------
+
+https://github.com/vaab/gitchangelog
+
+`Generating release notes from git commit messages using basic shell commands (git/grep) <https://blogs.sap.com/2018/06/22/generating-release-notes-from-git-commit-messages-using-basic-shell-commands-gitgrep/>`__
+
+`Automatically generated release notes <https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes>`__ at Github
+
 
 Browsing History
 -----------------
 
-Git provides us the power to browse the repository commit history - so we’re able to figure out what actually happened, who contributed and so on.
+Git provides us the power to browse the repository commit history - so we're able to figure out what actually happened, who contributed and so on.
 
-Let’s see how the conventions might ease up the browsing:
+Let's see how the conventions might ease up the browsing:
 
 .. code-block:: console
 

@@ -12,6 +12,9 @@ Welcome to Python Cookbook's documentation!
 
    coding/*
    documentation/*
+   regex-regular-expressions
+   testing_index.rst
+   recipes/recipe-index
 
 .. Indices and tables
 .. ==================
