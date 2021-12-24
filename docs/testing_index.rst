@@ -36,3 +36,4 @@ Websites
 ~~~~~~~~
 
 1. `Effective Python Testing With Pytest <https://realpython.com/pytest-python-testing/>`_, RealPython
+.. `End-To-End Tutorial For Pytest Fixtures With Examples <https://www.lambdatest.com/blog/end-to-end-tutorial-for-pytest-fixtures-with-examples/>`__
