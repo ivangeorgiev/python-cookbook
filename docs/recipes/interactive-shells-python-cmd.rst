@@ -1,4 +1,4 @@
-Create interactive shell with Python Cmd
+Interactive shell with Python Cmd
 ==========================================
 
 We are using Python's core module ``cmd``.
