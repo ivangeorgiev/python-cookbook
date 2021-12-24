@@ -6,3 +6,4 @@ Python recipes
 
    interactive-shells-python-cmd
    tasks-with-invoke
+   unpacking-items-from-iterables
