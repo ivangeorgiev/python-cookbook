@@ -172,3 +172,9 @@ And the output:
    __init__.py
    __main__.py
    __pycache__
+
+
+Further information
+--------------------
+
+Invoke provides a lot more features than what we saw. Refer to the `invoke's documentation <https://docs.pyinvoke.org/en/stable/index.html>`__ for further details.
