@@ -6,7 +6,8 @@ Pyton Testing
    :maxdepth: 1
    :glob:
 
-   testing_tox.rst
+   testing_pytest
+   testing_tox
 
 References
 ------------
