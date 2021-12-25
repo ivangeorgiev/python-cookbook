@@ -7,11 +7,13 @@ Testing with Pytest
 `Pytest`_ plugins
 -------------------
 
-- `pytest-cov`_ - Produce coverage reports.
+- `pytest-bdd`_ - Implements a subset of the Gherkin language to enable automating project requirements testing and to facilitate behavioral driven development.
+- `pytest-cov`_ - Produces coverage reports.
+- `pytest-django`_ -  Provides a set of useful tools for testing Django applications and projects.
 - `pytest-randomly`_ - Randomly order tests with controlled seed.
 - `pytest-reverse`_ - Execute tests in reverse order.
+- `pytest-splinter`_ - Provides a set of fixtures to use `splinter`_ for browser testing with `pytest`_
 - `pytest-xdist`_ - Adds test execution modes, e.g. multi-CPU and distributed.
-
 
 Running `doctest`_ test cases
 -----------------------------
@@ -94,11 +96,15 @@ This makes it very easy to migrate from `unittest`_ to `pytest_` or to combine t
 .. _doctest: https://docs.python.org/3/library/doctest.html
 .. _pytest: https://docs.pytest.org/en/latest/doctest.html
 .. _pytest doctest: https://docs.pytest.org/en/latest/doctest.html
+.. _pytest-bdd: https://github.com/pytest-dev/pytest-bdd
 .. _pytest-cov: https://github.com/pytest-dev/pytest-cov
 .. _pytest_cov documentation: https://pytest-cov.readthedocs.io/en/latest/
+.. _pytest-django: https://pytest-django.readthedocs.io/en/latest/
 .. _pytest-randomly: https://github.com/pytest-dev/pytest-randomly
 .. _pytest-reverse: https://github.com/adamchainz/pytest-reverse
+.. _pytest-splinter: https://github.com/pytest-dev/pytest-splinter
 .. _pytest-xdist: https://github.com/pytest-dev/pytest-xdist
+.. _splinter: https://splinter.readthedocs.io/en/latest/
 .. _unittest: https://docs.python.org/3/library/unittest.html
 
 .. _speed up your django tests: https://adamchainz.gumroad.com/l/suydt
