@@ -7,7 +7,7 @@ Testing with Pytest
 Generate XML report with `pytest`_
 -----------------------------------
 
-
+To generate XML report, add the ``--junitxml=<report-path>`` or ``--junit-xml=<report-path>`` option.
 
 `Pytest`_ built-in fixtures
 ----------------------------
