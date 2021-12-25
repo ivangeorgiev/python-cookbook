@@ -4,6 +4,66 @@ Testing with Pytest
 `Pytest`_ is arguably the most popular and widespread testing framework in the Python community. It is also compatible with Python's `unittest`_ and `doctest`_.
 
 
+Generate XML report with `pytest`_
+-----------------------------------
+
+
+
+`Pytest`_ built-in fixtures
+----------------------------
+
+List of `pytest`_ fixtures could be obtained by running ``pytest -q --fixtures``.
+
+Here are some interesting built-in fixtures:
+
+- ``pytestconfig`` [session scope]
+  Session-scoped fixture that returns the `pytest.config.Config`_ object.
+
+  Example::
+
+     def test_foo(pytestconfig):
+        if pytestconfig.getoption("verbose") > 0:
+             ...
+- ``monkeypatch``
+    A convenient fixture for monkey-patching.
+
+    The fixture provides these methods to modify objects, dictionaries or
+    os.environ::
+
+        monkeypatch.setattr(obj, name, value, raising=True)
+        monkeypatch.delattr(obj, name, raising=True)
+        monkeypatch.setitem(mapping, name, value)
+        monkeypatch.delitem(obj, name, raising=True)
+        monkeypatch.setenv(name, value, prepend=False)
+        monkeypatch.delenv(name, raising=True)
+        monkeypatch.syspath_prepend(path)
+        monkeypatch.chdir(path)
+
+    All modifications will be undone after the requesting test function or
+    fixture has finished. The ``raising`` parameter determines if a KeyError
+    or AttributeError will be raised if the set/deletion operation has no target.
+- ``request``
+    Special fixture of class `FixtureRequest`_ providing information of the requesting test function.
+- ``tmpdir``
+    Return a temporary directory path object which is unique to each test
+    function invocation, created as a sub directory of the base temporary
+    directory.
+
+    The returned object is a `py.path.local`_ path object.
+
+    .. _`py.path.local`: https://py.readthedocs.io/en/latest/path.html
+
+- ``tmp_path``
+    Return a temporary directory path object which is unique to each test
+    function invocation, created as a sub directory of the base temporary
+    directory.
+
+    The returned object is a :class:`pathlib.Path` object.
+
+    .. note::
+
+        In python < 3.6 this is a pathlib2.Path.
+
 `Pytest`_ plugins
 -------------------
 
@@ -94,8 +154,10 @@ Running the tests is as easy as:
 This makes it very easy to migrate from `unittest`_ to `pytest_` or to combine tests that use different frameworks.
 
 .. _doctest: https://docs.python.org/3/library/doctest.html
+.. _FixtureRequest: https://docs.pytest.org/en/latest/reference.html#pytest.FixtureRequest
 .. _pytest: https://docs.pytest.org/en/latest/doctest.html
 .. _pytest doctest: https://docs.pytest.org/en/latest/doctest.html
+.. _pytest.config.Config: https://docs.pytest.org/en/latest/reference.html#pytest.config.Config
 .. _pytest-bdd: https://github.com/pytest-dev/pytest-bdd
 .. _pytest-cov: https://github.com/pytest-dev/pytest-cov
 .. _pytest_cov documentation: https://pytest-cov.readthedocs.io/en/latest/
