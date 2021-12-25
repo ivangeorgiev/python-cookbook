@@ -9,6 +9,40 @@ Generate XML report with `pytest`_
 
 To generate XML report, add the ``--junitxml=<report-path>`` or ``--junit-xml=<report-path>`` option.
 
+Show test function docstring in report
+---------------------------------------
+
+.. code-block:: python
+
+   # conftest.py
+
+   import pytest
+
+   @pytest.hookimpl(hookwrapper=True)
+   def pytest_runtest_makereport(item, call):
+      outcome = yield
+      report = outcome.get_result()
+
+      test_fn = item.obj
+      docstring = getattr(test_fn, '__doc__')
+      if docstring:
+         report.nodeid = docstring
+
+
+   # test_it.py
+
+   def test_ok():
+      """This is my very important test."""
+      print("ok")
+
+This will produce output similar to:
+
+.. code-block:: console
+
+   $ pytest -v
+   test_docstring_in_report.py::test_ok
+   ..\..\..\This is my very important test. PASSED                 [100%]
+
 `Pytest`_ built-in fixtures
 ----------------------------
 
