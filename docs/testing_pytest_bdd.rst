@@ -82,7 +82,7 @@ This scenario has no ``Given`` steps, just one ``When`` step for action and one 
 
 .. sidebar:: Fixtures
 
-   ``pytest-bdd`` allows results returned from a test method to be stored into ``pytest`` fixture. This is done by passing a ``target_fixture`` parameter to the ``@given``, ``@when`` or ``@then`` decorator:
+   ``pytest-bdd`` allows the return result from a test function to be stored into ``pytest`` fixture. This is done by passing a ``target_fixture`` parameter to the ``@given``, ``@when`` or ``@then`` decorator:
 
    .. code-block:: python
 
@@ -575,9 +575,16 @@ Cucumber JSON output
    ]
 
 
-For detailed information refer to the `pytest-bdd documentation`_.
+Further reading
+----------------
 
+- `Pytest-bdd documentation`_ is the ultimate reference when it comes to ``pytest-bdd``.
+- Andrew Knight has created a great `Behavior Driven Python with pytest-bdd`_ course on Applitools's Test Automation University.
+
+.. _`Behavior Driven Python with pytest-bdd`: `pytest-bdd TAU course`_
 .. _`examples source repository`: https://github.com/ivangeorgiev/python-refs/tree/main/src/python_refs/pytest_bdd
 .. _`pytest-bdd`: `pytest-bdd source`_
 .. _`pytest-bdd documentation`: https://pytest-bdd.readthedocs.io/en/latest/
 .. _`pytest-bdd source`: https://github.com/pytest-dev/pytest-bdd
+.. _`Test Automation University`: https://testautomationu.applitools.com/
+.. _`pytest-bdd TAU course`: https://testautomationu.applitools.com/behavior-driven-python-with-pytest-bdd/
