@@ -1,8 +1,14 @@
+import pytest
 from pytest_bdd import given, parsers, scenario, scenarios, then, when
 
 from ...basket import Basket
 
 scenarios("feature/basket.feature")
+
+
+@pytest.fixture
+def basket_factory():
+    return Basket
 
 
 @scenario("feature/basket.feature", "Get cucumbers")
@@ -31,8 +37,13 @@ def test_get_cucumbers():
     parsers.parse("there are {start:d} cucumber in the basket"),
     target_fixture="basket",
 )
-def basket(start: int) -> Basket:
-    return Basket(start)
+def given_basket(start: int, basket_factory) -> Basket:
+    return basket_factory(start)
+
+
+@when("I create empty basket", target_fixture="basket")
+def create_empty_basket() -> Basket:
+    return Basket()
 
 
 @when(parsers.parse("I put {num:d} cucumber"))

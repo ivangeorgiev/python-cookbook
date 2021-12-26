@@ -8,6 +8,10 @@ To install ``pytest-bdd``:
    $ pip install pytest-bdd
    ..................
 
+.. note::
+
+   The complete example the basket simulation used here and all test cases can be found in `examples source repository`_.
+
 We are going to test a simple basket simulation:
 
 .. code-block:: python
@@ -59,20 +63,36 @@ This scenario has no ``Given`` steps, just one ``When`` step for action and one 
    from .basket import Basket
    from pytest_bdd import scenario, given, when, then
 
+   @pytest.fixture
+   def basket() -> Basket:
+      """Create empty basket."""
+      return Basket()
 
    @scenario("feature/basic_basket.feature", "Create empty basket")
    def test_create_empty_basket():
       pass
 
-   @when("I create empty basket", target_fixture="basket")
-   def basket():
-      return Basket()
+   @when("I create empty basket")
+   def empty_basket(basket):
+      pass
 
    @then("basket should be empty")
    def assert_empty_basket(basket: Basket):
       assert basket.count == 0
 
-Although trivial scenario, our test uses one of the most important aspects of the testing - the fixtures. ``pytest`` implements fixtures as dependency injection mechanism which could be used to maintain state between steps. In our scenario the ``when`` step creates a basket and needs somehow to pass the basket to following steps. To achieve this, we use ``target_fixture="basket"`` in the ``when`` step to tell ``pytest-bdd`` to assign the result of the function to a ``basket`` ``pytest`` fixutre. Later we specify the ``basket`` argument to the ``then`` step to tell ``pytest`` to inject the ``basket`` fixture.
+.. sidebar:: Fixtures
+
+   ``pytest-bdd`` allows results returned from a test method to be stored into ``pytest`` fixture. This is done by passing a ``target_fixture`` parameter to the ``@given``, ``@when`` or ``@then`` decorator:
+
+   .. code-block:: python
+
+      @when("I create empty basket", target_fixture="basket")
+      def empty_basket(basket) -> Basket:
+         return Basket()
+
+Although trivial scenario, our test uses one of the most important aspects of the testing - the fixtures. ``pytest`` implements fixtures as dependency injection mechanism which could be used to maintain state between steps. In our scenario the ``when`` step should create an empty basket and pass it to steps that follow. We achieve this by using a ``basket`` fixture.
+
+``pytest-bdd`` provides alternative way of initializing ``pytest`` fixtures. ``@given``, ``@when`` and ``@then`` decorators accept ``target_fixture`` parameter. See the sidebar for an example.
 
 We can execute the tests now and observe the output:
 
@@ -305,8 +325,259 @@ Here is the terminal report with different levels of verbosity.
    ============================== 5 passed in 0.11s ==============================
 
 
+Cucumber JSON output
+----------------------
+
+.. code-block:: console
+
+   $ pytest pytest tests\basket --cucumber-json=bdd-result.json
+   ......................
+
+.. code-block:: json
+   :caption: bdd-result.json
+
+   [{
+         "keyword": "Feature",
+         "uri": "basket\\feature/basic_basket.feature",
+         "name": "Basic basket",
+         "id": "basket\\feature/basic_basket.feature",
+         "line": 1,
+         "description": "",
+         "tags": [],
+         "elements": [{
+                  "keyword": "Scenario",
+                  "id": "test_create_empty_basket",
+                  "name": "Create empty basket",
+                  "line": 2,
+                  "description": "",
+                  "tags": [],
+                  "type": "scenario",
+                  "steps": [{
+                           "keyword": "When",
+                           "name": "I create empty basket",
+                           "line": 3,
+                           "match": {
+                              "location": ""
+                           },
+                           "result": {
+                              "status": "passed",
+                              "duration": 116700
+                           }
+                     }, {
+                           "keyword": "Then",
+                           "name": "basket should be empty",
+                           "line": 4,
+                           "match": {
+                              "location": ""
+                           },
+                           "result": {
+                              "status": "passed",
+                              "duration": 50299
+                           }
+                     }
+                  ]
+               }, {
+                  "keyword": "Scenario",
+                  "id": "test_add_to_empty_basket",
+                  "name": "Add to empty basket",
+                  "line": 6,
+                  "description": "",
+                  "tags": [],
+                  "type": "scenario",
+                  "steps": [{
+                           "keyword": "Given",
+                           "name": "empty basket",
+                           "line": 7,
+                           "match": {
+                              "location": ""
+                           },
+                           "result": {
+                              "status": "passed",
+                              "duration": 74599
+                           }
+                     }, {
+                           "keyword": "When",
+                           "name": "I put 3 cucumbers",
+                           "line": 8,
+                           "match": {
+                              "location": ""
+                           },
+                           "result": {
+                              "status": "passed",
+                              "duration": 42600
+                           }
+                     }, {
+                           "keyword": "Then",
+                           "name": "basket should have 3 cucumbers",
+                           "line": 9,
+                           "match": {
+                              "location": ""
+                           },
+                           "result": {
+                              "status": "passed",
+                              "duration": 33499
+                           }
+                     }
+                  ]
+               }
+         ]
+      }, {
+         "keyword": "Feature",
+         "uri": "feature\\basket.feature",
+         "name": "Basket",
+         "id": "feature\\basket.feature",
+         "line": 1,
+         "description": "",
+         "tags": [],
+         "elements": [{
+                  "keyword": "Scenario",
+                  "id": "test_get_cucumbers[0-5-5]",
+                  "name": "Get cucumbers",
+                  "line": 2,
+                  "description": "",
+                  "tags": [],
+                  "type": "scenario",
+                  "steps": [{
+                           "keyword": "Given",
+                           "name": "there are 0 cucumbers in the basket",
+                           "line": 3,
+                           "match": {
+                              "location": ""
+                           },
+                           "result": {
+                              "status": "passed",
+                              "duration": 91200
+                           }
+                     }, {
+                           "keyword": "When",
+                           "name": "I put 5 cucumbers",
+                           "line": 4,
+                           "match": {
+                              "location": ""
+                           },
+                           "result": {
+                              "status": "passed",
+                              "duration": 92600
+                           }
+                     }, {
+                           "keyword": "Then",
+                           "name": "I should have 5 cucumbers",
+                           "line": 5,
+                           "match": {
+                              "location": ""
+                           },
+                           "result": {
+                              "status": "passed",
+                              "duration": 68099
+                           }
+                     }
+                  ]
+               }, {
+                  "keyword": "Scenario",
+                  "id": "test_get_cucumbers[3-7-10]",
+                  "name": "Get cucumbers",
+                  "line": 2,
+                  "description": "",
+                  "tags": [],
+                  "type": "scenario",
+                  "steps": [{
+                           "keyword": "Given",
+                           "name": "there are 3 cucumbers in the basket",
+                           "line": 3,
+                           "match": {
+                              "location": ""
+                           },
+                           "result": {
+                              "status": "passed",
+                              "duration": 96899
+                           }
+                     }, {
+                           "keyword": "When",
+                           "name": "I put 7 cucumbers",
+                           "line": 4,
+                           "match": {
+                              "location": ""
+                           },
+                           "result": {
+                              "status": "passed",
+                              "duration": 55499
+                           }
+                     }, {
+                           "keyword": "Then",
+                           "name": "I should have 10 cucumbers",
+                           "line": 5,
+                           "match": {
+                              "location": ""
+                           },
+                           "result": {
+                              "status": "passed",
+                              "duration": 46000
+                           }
+                     }
+                  ]
+               }, {
+                  "keyword": "Scenario",
+                  "id": "test_get_cucumbers_multiple_times",
+                  "name": "Get cucumbers multiple times",
+                  "line": 12,
+                  "description": "",
+                  "tags": [],
+                  "type": "scenario",
+                  "steps": [{
+                           "keyword": "Given",
+                           "name": "there are 5 cucumbers in the basket",
+                           "line": 13,
+                           "match": {
+                              "location": ""
+                           },
+                           "result": {
+                              "status": "passed",
+                              "duration": 107100
+                           }
+                     }, {
+                           "keyword": "When",
+                           "name": "I get 1 cucumber from the basket",
+                           "line": 14,
+                           "match": {
+                              "location": ""
+                           },
+                           "result": {
+                              "status": "passed",
+                              "duration": 53600
+                           }
+                     }, {
+                           "keyword": "And",
+                           "name": "I get 3 cucumbers from the basket",
+                           "line": 15,
+                           "match": {
+                              "location": ""
+                           },
+                           "result": {
+                              "status": "passed",
+                              "duration": 48300
+                           }
+                     }, {
+                           "keyword": "Then",
+                           "name": "I should have 1 cucumbers in the basket",
+                           "line": 16,
+                           "match": {
+                              "location": ""
+                           },
+                           "result": {
+                              "status": "passed",
+                              "duration": 46500
+                           }
+                     }
+                  ]
+               }
+         ]
+      }
+   ]
+
+
 For detailed information refer to the `pytest-bdd documentation`_.
 
+.. _`examples source repository`: https://github.com/ivangeorgiev/python-refs/tree/main/src/python_refs/pytest_bdd
 .. _`pytest-bdd`: `pytest-bdd source`_
 .. _`pytest-bdd documentation`: https://pytest-bdd.readthedocs.io/en/latest/
 .. _`pytest-bdd source`: https://github.com/pytest-dev/pytest-bdd
