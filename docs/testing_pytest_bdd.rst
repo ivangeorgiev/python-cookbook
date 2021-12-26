@@ -578,7 +578,7 @@ Cucumber JSON output
 Passing context across steps
 -----------------------------------------
 
-`Behave`_ framework has no fixtures and uses generic catch-them-all context to pass across test steps. Many newcomers to the ``pytest`` and ``pytest-bdd`` world are wondering how to do the same with ``pytest-bdd``. Read further to find how.
+`Behave`_ framework uses generic catch-them-all context to maintain state across test steps. Many newcomers to the ``pytest`` and ``pytest-bdd`` world are wondering how to do the same with ``pytest-bdd``. Read further to find how.
 
 .. warning:: Use context wisely and with caution
 
