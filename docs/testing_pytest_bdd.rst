@@ -136,9 +136,9 @@ What if we want to perform the *"I put 3 cucumbers"* step with different number 
    Feature: Basket
       Scenario: Get cucumbers multiple times
          Given there are 5 cucumbers in the basket
-         When I get 1 cucumber from the basket
-         And I get 3 cucumbers from the basket
-         Then I should have 1 cucumbers in the basket
+         When I get 1 cucumber
+         And I get 3 cucumbers
+         Then I should have 1 cucumbers
 
 We implement this as:
 
@@ -156,11 +156,11 @@ We implement this as:
       return Basket(start)
 
 
-   @when(parsers.parse("I get {num:d} cucumbers from the basket"))
+   @when(parsers.parse("I get {num:d} cucumbers"))
    def get_cucumbers(num, basket: Basket):
       basket.get(num)
 
-   @then(parsers.parse("I should have {num:d} cucumbers in the basket"))
+   @then(parsers.parse("I should have {num:d} cucumbers"))
    def assert_left(num, basket: Basket):
       assert basket.count == num
 
@@ -168,6 +168,39 @@ Step decorator can accept as first ``name`` argument:
 
 - ``str`` - exact match. Passes no parameters.
 - ``parse`` - Provides a simple parser that replaces regular expressions for step parameters with a readable syntax like ``{param:Type}``. The named fields are extracted, optionally type converted and then used as step function arguments.
+- ``cfparse`` - Provides an extended parser with “Cardinality Field” (CF) support.
+- ``re`` - This uses full regular expressions to parse the clause text. You will need to use named groups ``“(?P<name>…)”`` to define the variables pulled from the text and passed to your step function.
+
+We are using ``parse`` argument to parametrize our steps.
+
+
+Scenario outlines
+-------------------
+
+Scenarios can be parametrized to cover few cases. In Gherkin the variable templates are written using corner braces as ``<somevalue>``. These are called `scenario outlines <https://behat.org/en/v3.0/user_guide/writing_scenarios.html#scenario-outlines>`__:
+
+.. code-block::
+   :caption: basket.feature
+
+   # .........
+   Scenario Outline: Get cucumbers
+      Given there are <start> cucumbers in the basket
+      When I put <num> cucumbers
+      Then I should have <left> cucumbers
+
+      Examples:
+         | start | num | left |
+         | 0     | 5   | 5    |
+         | 3     | 7   | 10   |
+
+We have only one step implementation missing: the *"I put <num> cucumbers"* ``when`` step:
+
+.. code-block:: python
+   :caption: basket.py
+
+   @when(parsers.parse("I put {num:d} cucumbers"))
+   def get_cucumbers(num, basket: Basket):
+      basket.get(num)
 
 
 
