@@ -2,3 +2,5 @@ sphinx
 sphinx-rtd-theme
 sphinx-book-theme
 sphinx-documatt-theme
+pytest
+pytest-bdd

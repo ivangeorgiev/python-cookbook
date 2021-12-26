@@ -7,6 +7,7 @@ Pyton Testing
    :glob:
 
    testing_pytest
+   testing_pytest_bdd
    testing_tox
 
 References

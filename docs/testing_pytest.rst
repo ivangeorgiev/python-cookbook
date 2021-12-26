@@ -50,6 +50,43 @@ List of `pytest`_ fixtures could be obtained by running ``pytest -q --fixtures``
 
 Here are some interesting built-in fixtures:
 
+- ``capsys``
+    Enable text capturing of writes to ``sys.stdout`` and ``sys.stderr``.
+
+    Returns an instance of `CaptureFixture`_ to give access to captured ``stdout`` and ``stderr``.
+
+    The captured output is made available via ``capsys.readouterr()`` method
+    calls, which return a ``(out, err)`` namedtuple.
+    ``out`` and ``err`` will be ``text`` objects.
+
+    Example::
+
+      def test_output(capsys):
+         print("hello")
+         captured = capsys.readouterr()
+         assert captured.out == "hello\n"
+
+- ``capsysbinary``
+    Enable bytes capturing of writes to ``sys.stdout`` and ``sys.stderr``.
+
+    The captured output is made available via ``capsysbinary.readouterr()``
+    method calls, which return a ``(out, err)`` namedtuple.
+    ``out`` and ``err`` will be ``bytes`` objects.
+
+- ``capfd``
+    Enable text capturing of writes to file descriptors ``1`` and ``2``.
+
+    The captured output is made available via ``capfd.readouterr()`` method
+    calls, which return a ``(out, err)`` namedtuple.
+    ``out`` and ``err`` will be ``text`` objects.
+
+- ``capfdbinary``
+    Enable bytes capturing of writes to file descriptors ``1`` and ``2``.
+
+    The captured output is made available via ``capfd.readouterr()`` method
+    calls, which return a ``(out, err)`` namedtuple.
+    ``out`` and ``err`` will be ``byte`` objects.
+
 - ``pytestconfig`` [session scope]
   Session-scoped fixture that returns the `pytest.config.Config`_ object.
 
@@ -188,6 +225,7 @@ Running the tests is as easy as:
 This makes it very easy to migrate from `unittest`_ to `pytest_` or to combine tests that use different frameworks.
 
 .. _doctest: https://docs.python.org/3/library/doctest.html
+.. _CaptureFixture: https://docs.pytest.org/en/6.2.x/reference.html#pytest.CaptureFixture
 .. _FixtureRequest: https://docs.pytest.org/en/latest/reference.html#pytest.FixtureRequest
 .. _pytest: https://docs.pytest.org/en/latest/doctest.html
 .. _pytest doctest: https://docs.pytest.org/en/latest/doctest.html
