@@ -608,7 +608,7 @@ Passing context across steps
 
    scenarios("./context.feature")
 
-   @pytest.fixture(autouse=True)
+   @pytest.fixture(scope="function")
    def ctx():
       yield {}
 
