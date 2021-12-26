@@ -3,9 +3,11 @@ import re
 
 
 class Application:
-    PHONE_EXPR = re.compile('^[+]?[0-9]{3,}$')
+    PHONE_EXPR = re.compile("^[+]?[0-9]{3,}$")
+    save_filepath: str
 
-    def __init__(self):
+    def __init__(self, save_filepath=None):
+        self.save_filepath = save_filepath or "./contacts.json"
         self._clear()
 
     def _clear(self):
@@ -34,14 +36,12 @@ class Application:
             raise ValueError(f"Invalid command: {cmd}")
 
     def save(self):
-        with open("./contacts.json", "w+") as f:
+        with open(self.save_filepath, "w+") as f:
             json.dump({"_contacts": self._contacts}, f)
 
     def load(self):
-        with open("./contacts.json") as f:
-            self._contacts = [
-                tuple(t) for t in json.load(f)["_contacts"]
-            ]
+        with open(self.save_filepath) as f:
+            self._contacts = [tuple(t) for t in json.load(f)["_contacts"]]
 
     def add(self, name, phonenum):
         if not isinstance(phonenum, str):
@@ -54,9 +54,7 @@ class Application:
         self.save()
 
     def delete(self, name):
-        self._contacts = [
-            c for c in self._contacts if c[0] != name
-        ]
+        self._contacts = [c for c in self._contacts if c[0] != name]
         self.save()
 
     def printlist(self):

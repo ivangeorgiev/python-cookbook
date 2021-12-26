@@ -1,14 +1,21 @@
 import json
 import os
 
+import pytest
+
 from ....contacts import Application
 
 
-class TestLoading:
-    def test_load(self):
-        app = Application()
+@pytest.fixture
+def save_filepath(tmpdir):
+    return tmpdir / "contacts.json"
 
-        with open("./contacts.json", "w+") as f:
+
+class TestLoading:
+    def test_load(self, save_filepath):
+        app = Application(save_filepath=save_filepath)
+
+        with open(save_filepath, "w+") as f:
             json.dump({"_contacts": [("NAME SURNAME", "3333")]}, f)
 
         app.load()
@@ -17,8 +24,8 @@ class TestLoading:
 
 
 class TestSaving:
-    def test_save(self):
-        app = Application()
+    def test_save(self, save_filepath):
+        app = Application(save_filepath=save_filepath)
         app._contacts = [("NAME SURNAME", "3333")]
 
         try:
@@ -28,5 +35,5 @@ class TestSaving:
 
         app.save()
 
-        with open("./contacts.json") as f:
+        with open(save_filepath) as f:
             assert json.load(f) == {"_contacts": [["NAME SURNAME", "3333"]]}
