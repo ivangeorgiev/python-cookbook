@@ -202,6 +202,107 @@ We have only one step implementation missing: the *"I put <num> cucumbers"* ``wh
    def get_cucumbers(num, basket: Basket):
       basket.get(num)
 
+Gherkin-formatted report
+----------------------------
+
+Here is the terminal report with different levels of verbosity.
+
+.. code-block:: console
+
+   $ pytest tests\basket --gherkin-terminal-reporter
+   ...............................
+   plugins: bdd-5.0.0
+   collected 5 items
+
+   tests\basket\test_basic_basket.py ..                                     [ 40%]
+   tests\basket\test_basket.py ...                                          [100%]
+
+   ============================== 5 passed in 0.08s ==============================
+
+
+.. code-block:: console
+
+   $ pytest tests\basket --gherkin-terminal-reporter -v
+   ...............................
+   plugins: bdd-5.0.0
+   collected 5 items
+
+   tests\basket\test_basic_basket.py::test_create_empty_basket
+   Feature: Basic basket
+      Scenario: Create empty basket PASSED
+
+   tests\basket\test_basic_basket.py::test_add_to_empty_basket
+   Feature: Basic basket
+      Scenario: Add to empty basket PASSED
+
+   tests\basket\test_basket.py::test_get_cucumbers[0-5-5]
+   Feature: Basket
+      Scenario: Get cucumbers PASSED
+
+   tests\basket\test_basket.py::test_get_cucumbers[3-7-10]
+   Feature: Basket
+      Scenario: Get cucumbers PASSED
+
+   tests\basket\test_basket.py::test_get_cucumbers_multiple_times
+   Feature: Basket
+      Scenario: Get cucumbers multiple times PASSED
+
+   ============================== 5 passed in 0.09s ==============================
+
+
+.. code-block:: console
+
+   $ pytest tests\basket --gherkin-terminal-reporter -vv
+   ...............................
+   plugins: bdd-5.0.0
+   collected 5 items
+
+   tests\basket\test_basic_basket.py::test_create_empty_basket <- ..\.venv310\lib\site-packages\pytest_bdd\scenario.py
+   Feature: Basic basket
+      Scenario: Create empty basket
+         When I create empty basket
+         Then basket should be empty
+      PASSED
+
+
+   tests\basket\test_basic_basket.py::test_add_to_empty_basket <- ..\.venv310\lib\site-packages\pytest_bdd\scenario.py
+   Feature: Basic basket
+      Scenario: Add to empty basket
+         Given empty basket
+         When I put 3 cucumbers
+         Then basket should have 3 cucumbers
+      PASSED
+
+
+   tests\basket\test_basket.py::test_get_cucumbers[0-5-5] <- ..\.venv310\lib\site-packages\pytest_bdd\scenario.py
+   Feature: Basket
+      Scenario: Get cucumbers
+         Given there are 0 cucumbers in the basket
+         When I put 5 cucumbers
+         Then I should have 5 cucumbers
+      PASSED
+
+
+   tests\basket\test_basket.py::test_get_cucumbers[3-7-10] <- ..\.venv310\lib\site-packages\pytest_bdd\scenario.py
+   Feature: Basket
+      Scenario: Get cucumbers
+         Given there are 3 cucumbers in the basket
+         When I put 7 cucumbers
+         Then I should have 10 cucumbers
+      PASSED
+
+
+   tests\basket\test_basket.py::test_get_cucumbers_multiple_times <- ..\.venv310\lib\site-packages\pytest_bdd\scenario.py
+   Feature: Basket
+      Scenario: Get cucumbers multiple times
+         Given there are 5 cucumbers in the basket
+         When I get 1 cucumber from the basket
+         And I get 3 cucumbers from the basket
+         Then I should have 1 cucumbers in the basket
+      PASSED
+
+
+   ============================== 5 passed in 0.11s ==============================
 
 
 For detailed information refer to the `pytest-bdd documentation`_.
