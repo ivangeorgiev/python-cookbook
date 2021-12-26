@@ -575,12 +575,59 @@ Cucumber JSON output
    ]
 
 
+Passing context across steps
+-----------------------------------------
+
+`Behave`_ framework has no fixtures and uses generic catch-them-all context to pass across test steps. Many newcomers to the ``pytest`` and ``pytest-bdd`` world are wondering how to do the same with ``pytest-bdd``. Read further to find how.
+
+.. warning:: Use context wisely and with caution
+
+   Although passing context between steps is easy, genreally it should be considered code smell:
+
+   - Increases coupling between steps
+   - Makes dependencies implicit and obscure
+
+   It is recommended to use explicit fixtures instead. Initialize necessary fixtures by ``given`` steps. Pass the fixtures further to other steps as explicit ``pytest`` fixtures.
+
+
+``Pytest-bdd`` is a ``pytest`` plugin. This makes it possible to use ``pytest`` fixture to maintain state across test steps as context. Below is an example scenario and steps implementation which uses a dictionary as generic context to pass across steps.
+
+.. code-block:: gherkin
+   :caption: context.feature
+
+   Feature: Context with pytest-bdd
+      Scenario: Context is passed
+         When I run a step which updates the context
+         Then context is updated
+
+.. code-block:: python
+   :caption: test_context.py
+
+   import pytest
+   from pytest_bdd import scenarios, when, then
+
+   scenarios("./context.feature")
+
+   @pytest.fixture(autouse=True)
+   def ctx():
+      yield {}
+
+   @when("I run a step which updates the context")
+   def when_update_context(ctx):
+      ctx["updated"] = True
+
+   @then("context is updated")
+   def context_updated(ctx):
+      assert "updated" in ctx
+      assert ctx["updated"] is True
+
 Further reading
 ----------------
 
 - `Pytest-bdd documentation`_ is the ultimate reference when it comes to ``pytest-bdd``.
 - Andrew Knight has created a great `Behavior Driven Python with pytest-bdd`_ course on Applitools's Test Automation University.
 
+.. _`behave`: https://behave.readthedocs.io/en/stable/
 .. _`Behavior Driven Python with pytest-bdd`: `pytest-bdd TAU course`_
 .. _`examples source repository`: https://github.com/ivangeorgiev/python-refs/tree/main/src/python_refs/pytest_bdd
 .. _`pytest-bdd`: `pytest-bdd source`_
