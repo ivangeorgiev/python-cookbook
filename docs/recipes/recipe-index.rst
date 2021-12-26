@@ -7,3 +7,4 @@ Python recipes
    interactive-shells-python-cmd
    tasks-with-invoke
    unpacking-items-from-iterables
+   using-faker-to-generate-data-python
