@@ -9,6 +9,7 @@ Pyton Testing
    testing_pytest
    testing_pytest_bdd
    testing_tox
+   testing_web_selenium_python
 
 References
 ------------
