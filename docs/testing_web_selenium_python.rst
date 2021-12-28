@@ -271,11 +271,54 @@ Browser testing with ``pytest-bdd``
    ================================= 2 passed in 17.57s ==================================
 
 
+Take a screenshot
+------------------------------
+
+Selenium driver has ``save_screenshot()`` method which saves a screenshot of the browser vieweable area to an image file:
+
+.. code-block:: python
+
+   URL = "https://igeorgiev.eu"
+   with contextlib.closing(webdriver.Chrome()) as driver:
+      driver.get(URL)
+      driver.save_screenshot(str(SCREENSHOTS_DIR / "igeorgiev-home.png"))
+
+Here is the screenshot saved by Selemium for me:
+
+.. image:: _static/igeorgiev-home.png
+   :width: 60%
+
+You can save also a screenshot of an element:
+
+.. code-block:: python
+
+   URL = "https://igeorgiev.eu"
+   with contextlib.closing(webdriver.Chrome()) as driver:
+      driver.get(URL)
+      content = driver.find_element(By.CSS_SELECTOR, ".md-content")
+      content.screenshot(str(SCREENSHOTS_DIR / "igeorgiev-content.png"))
+
+And the screenshot of the element looks like:
+
+.. image:: _static/igeorgiev-content.png
+   :width: 60%
+
+The builtin methods provided by Selenium save only the visible part of the web page or an element. If you need to get a screenshot of the entire webpage or an element, you could use the `Selenium-Screenshot`_ package.
+
+More information
+~~~~~~~~~~~~~~~~~~~~
+
+You can get more information:
+
+- `Selenium TakeScreenshot <https://www.selenium.dev/documentation/webdriver/browser/windows/#takescreenshot>`_ from the official Selenium documentation.
+- `Selenium-Screenshot`_ --- take screenshots from entire webpage or element.
+
 .. _arrange-act-assert: https://automationpanda.com/2020/07/07/arrange-act-assert-a-pattern-for-writing-good-tests/
 .. _chromedriver: https://sites.google.com/chromium.org/driver/
 .. _gherkin: https://cucumber.io/docs/gherkin/
 .. _selenium: https://selenium-python.readthedocs.io/
 .. _selenium pypi: https://pypi.org/project/selenium/
+.. _Selenium-Screenshot: https://github.com/PyWizards/Selenium_Screenshot
 .. _webdriver: https://www.w3.org/TR/webdriver/
 .. _webdrivermanager: https://github.com/rasjani/webdrivermanager
 .. _webdrivermanager pypi: https://pypi.org/project/webdrivermanager/
