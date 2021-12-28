@@ -1,7 +1,21 @@
 Web tests with Selenium
 ============================
 
-`Selenium`_ WebDriver is a free open source package for automating interactions with a live browser. It implements the W3C `WebDriver`_ standard. To interact with each browser, we need a webdriver for that browser. For example, interacting with Chrome requires `chromedriver`_. You need to make sure `chromedriver`_ executable is downloaded and available in the system path. To make this process easier there are webdriver managers which automatcally download and install the webdriver executable. We are going to use `webdrivermanager`_
+
+`Selenium`_ WebDriver is a free open source package for automating interactions with a live browser. It implements the W3C `WebDriver`_ standard. To interact with each browser, we need a webdriver for that browser. For example, interacting with Chrome requires `chromedriver`_. You need to make sure `chromedriver`_ executable is downloaded and available in the system path. To make this process easier there are webdriver managers which automatcally download and install the webdriver executable. We are going to use `webdrivermanager`_.
+
+
+.. note:: Further Information Resources
+
+   There official `Selenium documentation`_ site is a great source of extensive information about Selenium. Information provided includes multiple supported programming languages, including Python.
+
+   Books are also great learning resources:
+
+   - `Browser Automation with Python and Selenium <https://learning.oreilly.com/videos/browser-automation-with/9781800560161/>`__ (7h video)
+   - `Selenium Python Automation Testing from Scratch and Frameworks <https://learning.oreilly.com/videos/selenium-python-automation/9781800567733/>`__ (16.5h video)
+   - `Python Testing with Selenium <https://learning.oreilly.com/library/view/python-testing-with/9781484262498/>`__
+   - `Hands-On Selenium WebDriver with Java <https://learning.oreilly.com/library/view/hands-on-selenium-webdriver/9781098109998/>`__
+
 
 To install `selenium pypi`_ and `webdrivermanager pypi`_ packages:
 
@@ -316,7 +330,9 @@ You can get more information:
 .. _arrange-act-assert: https://automationpanda.com/2020/07/07/arrange-act-assert-a-pattern-for-writing-good-tests/
 .. _chromedriver: https://sites.google.com/chromium.org/driver/
 .. _gherkin: https://cucumber.io/docs/gherkin/
-.. _selenium: https://selenium-python.readthedocs.io/
+.. _selenium: `selenium documentation`_
+.. _selenium documentation: https://www.selenium.dev/documentation/
+.. _selenium readthedocs: https://selenium-python.readthedocs.io/
 .. _selenium pypi: https://pypi.org/project/selenium/
 .. _Selenium-Screenshot: https://github.com/PyWizards/Selenium_Screenshot
 .. _webdriver: https://www.w3.org/TR/webdriver/
