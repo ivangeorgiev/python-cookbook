@@ -82,3 +82,13 @@ Shutdown the environment
     $ docker compose down
 
 
+Further reading
+----------------
+
+- `pgadmin 4 container <https://www.pgadmin.org/download/pgadmin-4-container/>`__
+- `pgadmin container mapped files and directories <https://www.pgadmin.org/docs/pgadmin4/latest/container_deployment.html#mapped-files-and-directories>`__
+
+
+.. https://geshan.com.np/blog/2021/12/docker-postgres/
+.. https://towardsdatascience.com/how-to-run-postgresql-and-pgadmin-using-docker-3a6a8ae918b5
+
