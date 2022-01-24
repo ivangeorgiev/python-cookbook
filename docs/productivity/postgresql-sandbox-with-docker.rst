@@ -8,10 +8,10 @@ In this recipe we will use Docker and Docker compose to setup a PostgreSQL sandb
 
 Although we call it sandbox, the environment preserves the data and configuration between sessions. You can start and stop the environment without loosing configuration and data.
 
-Describe the environment
+Define the environment
 ----------------------------------------------------------
 
-To describe the environment you need to create a ``docker-compose.yml`` file:
+To define our environment, we need to describe it to Docker compose. Create a ``docker-compose.yml`` file with the following environment definition:
 
 .. code-block:: yaml
    :caption: docker-compose.yml
@@ -21,15 +21,14 @@ To describe the environment you need to create a ``docker-compose.yml`` file:
     services:
     pgdb:
         image: postgres
-        #:14.1-alpine
         restart: always
         environment:
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=postgres
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
         ports:
-        - '5432:5432'
+            - '5432:5432'
         volumes: 
-        - pgdb:/var/lib/postgresql/data
+            - pgdb:/var/lib/postgresql/data
 
     pgadmin:
         container_name: pgadmin4_container
@@ -39,14 +38,15 @@ To describe the environment you need to create a ``docker-compose.yml`` file:
         PGADMIN_DEFAULT_EMAIL: admin@admin.com
         PGADMIN_DEFAULT_PASSWORD: postgres
         ports:
-        - "5050:80"
+            - "5050:80"
         volumes:
-        - pgadmin:/var/lib/pgadmin
+            - pgadmin:/var/lib/pgadmin
+    
     volumes:
-    pgdb:
-        driver: local
-    pgadmin:
-        driver: local
+        pgdb:
+            driver: local
+        pgadmin:
+            driver: local
 
 Start the environment
 -----------------------
