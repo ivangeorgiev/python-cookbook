@@ -15,6 +15,7 @@ Welcome to Python Cookbook's documentation!
    regex-regular-expressions
    testing_index.rst
    recipes/recipe-index
+   productivity/productivity-index
 
 .. Indices and tables
 .. ==================
